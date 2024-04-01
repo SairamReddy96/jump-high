@@ -68,5 +68,9 @@ public class PlayerController : MonoBehaviour
             isOnPlatform = true;
             //Debug.Log("Collision!");
         }
+        if(collision.gameObject.CompareTag("Spike"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
