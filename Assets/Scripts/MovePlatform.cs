@@ -22,6 +22,11 @@ public class MovePlatform : MonoBehaviour
         Vector3 movement = moveDirection * platformVelocity * Time.deltaTime;
         transform.Translate(movement);
         
+        if(player != null)
+        {
+            player.transform.position += movement;
+        }
+
         ChangeDirectiononBounds();
     }
     void ChangeDirectiononBounds()
@@ -40,14 +45,14 @@ public class MovePlatform : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             player = collision.gameObject;
-            collision.transform.SetParent(transform);
+            //collision.transform.SetParent(transform);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Player" && player != null)
+        if (collision.gameObject.name == "Player")
         {
-            collision.transform.SetParent(null);
+            //collision.transform.SetParent(null);
             player = null;
         }
     }

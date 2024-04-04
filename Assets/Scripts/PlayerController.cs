@@ -14,10 +14,14 @@ public class PlayerController : MonoBehaviour
     private float gravityModifier = 0.5f;
     private float xBound = 30.0f;
     protected Rigidbody2D playerRb;
+    [SerializeField]
+    protected ParticleSystem deathParticles;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         //Physics.gravity *= gravityModifier;
     }
 
@@ -70,7 +74,11 @@ public class PlayerController : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("Spike"))
         {
-            Destroy(this.gameObject);
+            deathParticles.transform.position = transform.position;
+            deathParticles.Play();
+            gameManager.GameOver();
+            this.gameObject.SetActive(false);
+            Destroy(this.gameObject, 0.5f);
         }
     }
 }
