@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 1510445766165478968}
   - component: {fileID: 5366494800442075701}
   - component: {fileID: 2951063379310386010}
+  - component: {fileID: -5648870702352229071}
   m_Layer: 0
   m_Name: Platform 04
   m_TagString: Platform
@@ -428,3 +429,15 @@ MonoBehaviour:
   platformVelocity: 12
   moveDirection: {x: 1, y: 0, z: 0}
   player: {fileID: 0}
+--- !u!114 &-5648870702352229071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3895530281684695444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6624f3f96923aa64c84c5a90b66c8508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

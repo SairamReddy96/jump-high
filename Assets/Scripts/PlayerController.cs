@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("Spike"))
         {
-            deathParticles.transform.position = transform.position;
+            deathParticles.transform.position = transform.position + new Vector3(0, 0, -5.0f);
             deathParticles.Play();
             gameManager.GameOver();
             this.gameObject.SetActive(false);
