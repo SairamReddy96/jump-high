@@ -52,12 +52,12 @@ public class GameManager : MonoBehaviour
     public void IncreasePlatformCount()
     {
         platformCount++;
-        platformText.text = "Platform Count : " + platformCount;
+        platformText.text = "Current Score : " + platformCount;
         UpdateHighScore();
     }
     public void UpdateHighScore()
     {
-        int currentHighScore = PlayerPrefs.GetInt("HighScore", 0); //default value - if none it returns 0
+        int currentHighScore = PlayerPrefs.GetInt("HighScore", 0); //default value - if none return 0
         if(platformCount > currentHighScore)
         {
             PlayerPrefs.SetInt("HighScore", platformCount);
