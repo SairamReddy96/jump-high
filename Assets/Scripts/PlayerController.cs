@@ -31,13 +31,16 @@ public class PlayerController : MonoBehaviour
     {
         
         RestrictOnBounds();
+        
         //  Debug.Log("Gravity value is " + Physics.gravity);
     }
     void FixedUpdate()
     {
         Move();
-        Jump();
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }        
     }
     void Move()
     {
@@ -47,22 +50,24 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && isOnPlatform == true)
+        Debug.Log("Jump is called");
+        if(isOnPlatform == true)
         {
             playerRb.AddForce(Vector3.up * jumpSpeed, ForceMode2D.Impulse);
+            Debug.Log("Jumped");
             isOnPlatform = false;
         }
     }
 
     void RestrictOnBounds()
     {
-        if(transform.position.x > xBound)
+        if(transform.position.x > xBound-9.5f)
         {
-            transform.position = new Vector3(xBound, transform.position.y, transform.position.z);
+            transform.position = new Vector3(xBound - 9.5f, transform.position.y, transform.position.z);
         }
-        if(transform.position.x < -(xBound+10))
+        if(transform.position.x < -xBound)
         {
-            transform.position = new Vector3(-(xBound+10), transform.position.y, transform.position.z);
+            transform.position = new Vector3(-xBound, transform.position.y, transform.position.z);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

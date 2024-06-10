@@ -31,11 +31,11 @@ public class MovePlatform : MonoBehaviour
     }
     void ChangeDirectiononBounds()
     {
-        if (transform.position.x > 21.0f)
+        if (transform.position.x > 12.22f)
         {
             moveDirection = Vector3.left;
         }
-        if (transform.position.x < -30.0f)
+        if (transform.position.x < -21.1f)
         {
             moveDirection = Vector3.right;
         }
