@@ -10,6 +10,10 @@ public class MenuManager : MonoBehaviour
 
     public void ExitGame()
     {
-
+            
+    }
+    public void BacktoMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
