@@ -56,5 +56,12 @@ public class MovePlatform : MonoBehaviour
             player = null;
         }
     }
-
+    public float GetPlatformVelocity()
+    {
+        return this.platformVelocity;
+    }
+    public void UpdatePlatformVeclocity(float newSpeed)
+    {
+        platformVelocity = newSpeed;
+    }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4237722734979390623}
   - component: {fileID: 3034316799533607074}
   - component: {fileID: -8546705476935651933}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform 01
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0026819706, y: 0.09309651}
+  m_Offset: {x: 0.00524503, y: 0.093096495}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -134,7 +134,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.2307725, y: 0.5095558}
+  m_Size: {x: 2.2256465, y: 0.5095558}
   m_EdgeRadius: 0
 --- !u!114 &3034316799533607074
 MonoBehaviour:

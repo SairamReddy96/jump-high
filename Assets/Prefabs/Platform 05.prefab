@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1739728460063204035}
   - component: {fileID: 3096274066735236287}
   - component: {fileID: 6707684241451563100}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Triangle
   m_TagString: Spike
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 6139972727559238424}
   - component: {fileID: 7354618291521053469}
   - component: {fileID: -2975421722393005552}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform 05
   m_TagString: Platform
   m_Icon: {fileID: 0}

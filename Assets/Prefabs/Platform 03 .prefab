@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6449471637834831975}
   - component: {fileID: 1458747035029018873}
   - component: {fileID: 1509556211353777032}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'Platform 03 '
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 5923429135247224069}
   - component: {fileID: 2101292057889343935}
   - component: {fileID: 2658429181632923357}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Triangle
   m_TagString: Spike
   m_Icon: {fileID: 0}

@@ -13,15 +13,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float gravityModifier = 0.5f;
     private float xBound = 30.0f;
+    [SerializeField]
+    private GameObject movementFX;
     protected Rigidbody2D playerRb;
     [SerializeField]
     protected ParticleSystem deathParticles;
+    private Animator playerAnim;
     private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        playerAnim = GetComponent<Animator>();
         //Physics.gravity *= gravityModifier;
     }
 
@@ -50,12 +54,14 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        Debug.Log("Jump is called");
-        if(isOnPlatform == true)
+        //Debug.Log("Jump is called");
+        if(isOnPlatform)
         {
             playerRb.AddForce(Vector3.up * jumpSpeed, ForceMode2D.Impulse);
-            Debug.Log("Jumped");
+            //Debug.Log("Jumped");
             isOnPlatform = false;
+            playerAnim.SetBool("isJumping", true);
+            movementFX.SetActive(false);
         }
     }
 
@@ -75,6 +81,8 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Ground"))
         {
             isOnPlatform = true;
+            playerAnim.SetBool("isJumping", false);
+            movementFX.SetActive(true);
             //Debug.Log("Collision!");
         }
         if(collision.gameObject.CompareTag("Spike"))

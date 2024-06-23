@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI highScoreText;
     private Vector3 jumpHeight = new Vector3(0, 10.5f, -4);
     public int platformCount;
+    private float prevSpeed = 0f;
     [SerializeField]
     public bool isGameActive;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         StartCoroutine(MakePlatformSpawn());
         cameraShake = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
 
@@ -42,6 +45,8 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(cameraShake.ShakeCamera(.4f, .15f));
         isGameActive = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         StartCoroutine(LoadEndScene());
     }
     IEnumerator LoadEndScene()
@@ -53,8 +58,21 @@ public class GameManager : MonoBehaviour
     {
         int randomIndex = Random.Range(0, platformPrefabs.Count);
         GameObject platform = Instantiate(platformPrefabs[randomIndex], jumpHeight, platformPrefabs[randomIndex].transform.rotation);
+        MovePlatform movePlatform = platform.GetComponent<MovePlatform>();
+        if (movePlatform != null) {
+            float speed = movePlatform.GetPlatformVelocity();
+
+            if (speed == prevSpeed)
+            {
+               // Debug.Log("Same speed");
+                movePlatform.UpdatePlatformVeclocity(speed * 1.35f);
+
+            }
+            prevSpeed = speed;
+        }
         //Debug.Log("The platform height is " + jumpHeight);
         jumpHeight = platform.transform.position + new Vector3(0, 12.5f);
+
     }
     public void IncreasePlatformCount()
     {
