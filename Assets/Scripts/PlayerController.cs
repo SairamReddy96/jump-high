@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private float xBound = 30.0f;
     [SerializeField]
     private GameObject movementFX;
+    [SerializeField] protected ParticleSystem leftFX;
+    [SerializeField] protected ParticleSystem rightFX;
     protected Rigidbody2D playerRb;
     [SerializeField]
     protected ParticleSystem deathParticles;
@@ -33,22 +35,25 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        
         RestrictOnBounds();
-        
-        //  Debug.Log("Gravity value is " + Physics.gravity);
-    }
-    void FixedUpdate()
-    {
-        Move();
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //Debug.Log("The Spacebar is pressed");
             Jump();
-        }        
+        }       
+        //  Debug.Log("Gravity value is " + Physics.gravity);
+    }
+
+    void FixedUpdate()
+    {
+        //Debug.Log("FixedUpdate is running");
+        Move();      
     }
     void Move()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
+        PlayMovParticles(horizontalInput);
         Vector3 velocity = new Vector3(horizontalInput * speed, 0, 0);
         transform.Translate(velocity);
     }
@@ -58,7 +63,7 @@ public class PlayerController : MonoBehaviour
         if(isOnPlatform)
         {
             playerRb.AddForce(Vector3.up * jumpSpeed, ForceMode2D.Impulse);
-            //Debug.Log("Jumped");
+            //Debug.Log("Jumped with force "+ Vector3.up * jumpSpeed);
             isOnPlatform = false;
             playerAnim.SetBool("isJumping", true);
             movementFX.SetActive(false);
@@ -92,6 +97,17 @@ public class PlayerController : MonoBehaviour
             gameManager.GameOver();
             this.gameObject.SetActive(false);
             Destroy(this.gameObject, 0.5f);
+        }
+    }
+    void PlayMovParticles(float horizontaInput)
+    {
+        if(horizontaInput < 0 && !rightFX.isPlaying)
+        {
+            rightFX.Play();
+        }
+        else if(horizontaInput > 0 && !leftFX.isPlaying)
+        {
+            leftFX.Play();  
         }
     }
 }
