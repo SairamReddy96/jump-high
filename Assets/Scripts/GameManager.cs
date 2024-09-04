@@ -38,8 +38,13 @@ public class GameManager : MonoBehaviour
         while (isGameActive)
         {
             yield return new WaitForSeconds(0.5f);
-            GenerateRandomPlatforms();
+            GeneratePlatforms();
         }
+    }
+
+    void GeneratePlatforms()
+    {
+
     }
     public void GameOver()
     {
@@ -54,26 +59,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(2);
     }
-    void GenerateRandomPlatforms()
-    {
-        int randomIndex = Random.Range(0, platformPrefabs.Count);
-        GameObject platform = Instantiate(platformPrefabs[randomIndex], jumpHeight, platformPrefabs[randomIndex].transform.rotation);
-        MovePlatform movePlatform = platform.GetComponent<MovePlatform>();
-        if (movePlatform != null) {
-            float speed = movePlatform.GetPlatformVelocity();
 
-            if (speed == prevSpeed)
-            {
-               // Debug.Log("Same speed");
-                movePlatform.UpdatePlatformVeclocity(speed * 1.35f);
-
-            }
-            prevSpeed = speed;
-        }
-        //Debug.Log("The platform height is " + jumpHeight);
-        jumpHeight = platform.transform.position + new Vector3(0, 12.5f);
-
-    }
     public void IncreasePlatformCount()
     {
         platformCount++;

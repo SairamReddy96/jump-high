@@ -7,11 +7,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed = 60.0f;
     [SerializeField]
-    private float jumpSpeed = 10.0f;
-    [SerializeField]
-    private bool isOnPlatform = true;
+    private bool isOnPlatform = false;
     [SerializeField]
     private float gravityModifier = 0.5f;
+    [SerializeField]
+    private float jumpSpeed = 10.0f;
     private float xBound = 30.0f;
     [SerializeField]
     private GameObject movementFX;
@@ -57,13 +57,13 @@ public class PlayerController : MonoBehaviour
         Vector3 velocity = new Vector3(horizontalInput * speed, 0, 0);
         transform.Translate(velocity);
     }
-    void Jump()
+    public void Jump()
     {
         //Debug.Log("Jump is called");
         if(isOnPlatform)
         {
-            playerRb.AddForce(Vector3.up * jumpSpeed, ForceMode2D.Impulse);
             //Debug.Log("Jumped with force "+ Vector3.up * jumpSpeed);
+            playerRb.AddForce(Vector3.up * jumpSpeed , ForceMode2D.Impulse);
             isOnPlatform = false;
             playerAnim.SetBool("isJumping", true);
             movementFX.SetActive(false);
