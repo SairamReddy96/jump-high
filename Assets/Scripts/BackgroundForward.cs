@@ -7,7 +7,7 @@ public class BackgroundForward : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player != null)
+        if (player != null)
             transform.position = new Vector3(transform.position.x, player.transform.position.y);
     }
 }
