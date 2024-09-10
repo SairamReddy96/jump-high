@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> platformPrefabs;
     [SerializeField]
     protected GameObject player;
+    [SerializeField] protected GameObject snowFX;
     protected CameraShake cameraShake;
     [SerializeField]
     private TextMeshProUGUI platformText;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Destroy(snowFX);    
         StartCoroutine(LoadEndScene());
     }
     IEnumerator LoadEndScene()

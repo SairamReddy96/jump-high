@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpSpeed = 10.0f;
     [SerializeField]
-    private bool isOnPlatform = true;
+    public bool isOnPlatform = true;
     [SerializeField]
     private float gravityModifier = 0.5f;
     private float xBound = 30.0f;
@@ -81,22 +81,31 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(-xBound, transform.position.y, transform.position.z);
         }
     }
+    void PlayerDeath()
+    {
+        deathParticles.transform.position = transform.position + new Vector3(0, 0, -5.0f);
+        deathParticles.Play();
+        gameManager.GameOver();
+        this.gameObject.SetActive(false);
+        Destroy(this.gameObject, 0.5f);
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Ground"))
         {
-            isOnPlatform = true;
             playerAnim.SetBool("isJumping", false);
             movementFX.SetActive(true);
             //Debug.Log("Collision!");
         }
-        if(collision.gameObject.CompareTag("Spike"))
+        if(collision.gameObject.CompareTag("Spike") || collision.gameObject.CompareTag("Enemy"))
         {
-            deathParticles.transform.position = transform.position + new Vector3(0, 0, -5.0f);
-            deathParticles.Play();
-            gameManager.GameOver();
-            this.gameObject.SetActive(false);
-            Destroy(this.gameObject, 0.5f);
+            PlayerDeath();
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.gameObject.CompareTag("Enemy")) {
+            PlayerDeath();
         }
     }
     void PlayMovParticles(float horizontaInput)
