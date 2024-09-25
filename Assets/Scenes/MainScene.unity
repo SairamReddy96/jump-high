@@ -301,7 +301,7 @@ MonoBehaviour:
   speed: 1
   jumpSpeed: 65
   isOnPlatform: 1
-  gravityModifier: 1
+  fallMultiplier: 2.5
   movementFX: {fileID: 1083000895}
   leftFX: {fileID: 1177708345}
   rightFX: {fileID: 537319523}
@@ -683,7 +683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 51313332}
   yOffset: 5
-  smoothFollowSpeed: 5
+  smoothFollowSpeed: 2
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5756,9 +5756,10 @@ GameObject:
   - component: {fileID: 809031151}
   - component: {fileID: 809031150}
   - component: {fileID: 809031153}
-  - component: {fileID: 809031154}
   - component: {fileID: 809031156}
   - component: {fileID: 809031157}
+  - component: {fileID: 809031158}
+  - component: {fileID: 809031154}
   m_Layer: 3
   m_Name: Lava
   m_TagString: Enemy
@@ -5828,7 +5829,7 @@ Transform:
   m_GameObject: {fileID: 809031148}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.79, y: -31, z: -4.2468657}
+  m_LocalPosition: {x: -5, y: -31, z: -4.2468657}
   m_LocalScale: {x: 56, y: 35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10646,7 +10647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d08a7207a5a78a47bc499899607f11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movSpeed: 2
+  movSpeed: 0.15
   player: {fileID: 51313334}
   buffDist: 75
   offset: 20
@@ -10696,6 +10697,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &809031158
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809031148}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &904436641
 GameObject:
   m_ObjectHideFlags: 0

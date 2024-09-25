@@ -12,7 +12,6 @@ public class PlatformTrigger : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("Collision detected");
             playerController.isOnPlatform = true;
         }
     }

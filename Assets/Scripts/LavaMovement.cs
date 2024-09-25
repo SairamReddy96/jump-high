@@ -1,4 +1,5 @@
-using Unity.VisualScripting;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LavaMovement : MonoBehaviour
@@ -22,12 +23,15 @@ public class LavaMovement : MonoBehaviour
     }
     void MoveUp()
     {
-        Vector3 playerPos = player.position;
-        Vector3 currPos = transform.position;
-        Vector3 targetPos = new Vector3(transform.position.x, playerPos.y - offset, transform.position.z);
+        if(player != null)
+        {
+            Vector3 playerPos = player.position;
+            Vector3 currPos = transform.position;
+            Vector3 targetPos = new Vector3(transform.position.x, playerPos.y - offset, transform.position.z);
 
-        transform.position = Vector3.Lerp(currPos, targetPos, getLavaVelocity(playerPos, transform.position) * Time.deltaTime);
-        Debug.Log("The lavaspeed is " + getLavaVelocity(playerPos, transform.position));
+            transform.position = Vector3.Lerp(currPos, targetPos, getLavaVelocity(playerPos, transform.position) * Time.deltaTime);
+        }
+        
     }
     float getLavaVelocity(Vector3 playerPos, Vector3 lavaPos)
     {
@@ -39,4 +43,18 @@ public class LavaMovement : MonoBehaviour
         }
         return lavaSpeed;
     }
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.gameObject.CompareTag("Platform"))
+        {
+            //Debug.Log("Platform destroyed!");
+            StartCoroutine(DestroyPlatform(collider.gameObject));
+        }
+    }
+    IEnumerator DestroyPlatform(GameObject platform)
+    {
+        yield return new WaitForSeconds(0.25f);
+        Destroy(platform);
+    }
 }
+

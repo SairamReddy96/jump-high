@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public bool isOnPlatform = true;
     [SerializeField]
-    private float gravityModifier = 0.5f;
+    private float fallMultiplier = 2.5f;
     private float xBound = 30.0f;
     [SerializeField]
     private GameObject movementFX;
@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerAnim = GetComponent<Animator>();
-        //Physics.gravity *= gravityModifier;
     }
 
     // Update is called once per frame
@@ -62,11 +61,19 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Jump is called");
         if(isOnPlatform)
         {
-            playerRb.AddForce(Vector3.up * jumpSpeed, ForceMode2D.Impulse);
-            //Debug.Log("Jumped with force "+ Vector3.up * jumpSpeed);
+            BetterJump();
             isOnPlatform = false;
             playerAnim.SetBool("isJumping", true);
             movementFX.SetActive(false);
+        }
+    }
+    void BetterJump()
+    {
+        playerRb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+
+        if(playerRb.linearVelocity.y < 0)
+        {
+            playerRb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
     }
 

@@ -9,7 +9,7 @@ public class CameraFollower : MonoBehaviour
     [SerializeField]
     private float yOffset;
     [SerializeField]
-    private float smoothFollowSpeed = 10f;
+    private float smoothFollowSpeed = 2f;
 
 
     // Update is called once per frame
