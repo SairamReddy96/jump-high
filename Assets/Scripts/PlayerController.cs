@@ -7,11 +7,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed = 60.0f;
     [SerializeField]
-    private float jumpSpeed = 10.0f;
+    private float jumpSpeed = 65.0f;
     [SerializeField]
     public bool isOnPlatform = true;
     [SerializeField]
-    private float fallMultiplier = 2.5f;
+    private float fallMultiplier = 3.5f;
     private float xBound = 30.0f;
     [SerializeField]
     private GameObject movementFX;
@@ -20,13 +20,17 @@ public class PlayerController : MonoBehaviour
     protected Rigidbody2D playerRb;
     [SerializeField]
     protected ParticleSystem deathParticles;
+    [SerializeField]
+    protected ParticleSystem jumpForce;
     private Animator playerAnim;
     private GameManager gameManager;
+    private CameraShake cameraShake;
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        cameraShake = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
         playerAnim = GetComponent<Animator>();
     }
 
@@ -38,10 +42,22 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Debug.Log("The Spacebar is pressed");
-            Jump();
-        }       
-        //  Debug.Log("Gravity value is " + Physics.gravity);
+            if(Input.GetKey(KeyCode.W))
+            {
+                Jump(jumpSpeed + 8f);
+
+                if(jumpForce != null)
+                {
+                    jumpForce.Play();
+                }
+
+                StartCoroutine(cameraShake.ShakeCamera(.2f, .14f));
+            }
+            else
+            {
+                Jump(jumpSpeed);
+            }
+        }        
     }
 
     void FixedUpdate()
@@ -53,27 +69,23 @@ public class PlayerController : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         PlayMovParticles(horizontalInput);
-        Vector3 velocity = new Vector3(horizontalInput * speed, 0, 0);
+        Vector3 velocity = new Vector3(horizontalInput * speed * Time.fixedDeltaTime, 0, 0);
         transform.Translate(velocity);
     }
-    void Jump()
+    void Jump(float jumpSpeed)
     {
         //Debug.Log("Jump is called");
         if(isOnPlatform)
         {
-            BetterJump();
+            playerRb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+
+            if (playerRb.linearVelocity.y < 0)
+            {
+                playerRb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            }
             isOnPlatform = false;
             playerAnim.SetBool("isJumping", true);
             movementFX.SetActive(false);
-        }
-    }
-    void BetterJump()
-    {
-        playerRb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-
-        if(playerRb.linearVelocity.y < 0)
-        {
-            playerRb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
     }
 
