@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 51313336}
   - component: {fileID: 51313335}
   - component: {fileID: 51313337}
-  - component: {fileID: 51313338}
   - component: {fileID: 51313340}
   - component: {fileID: 51313341}
   m_Layer: 0
@@ -186,12 +185,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 8793639957104055765, guid: 736cb866fcdec804288d8d7293c96ef7, type: 3}
+  m_Sprite: {fileID: 8793639957104055765, guid: c28ec19a0b5ea9a4b936d1b2cb858f6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 2.44, y: 2.39}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -280,8 +279,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 2.44, y: 2.39}
+    newSize: {x: 2.44, y: 2.39}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -309,18 +308,6 @@ MonoBehaviour:
   rightFX: {fileID: 537319523}
   deathParticles: {fileID: 904436644}
   jumpForce: {fileID: 771812894}
---- !u!114 &51313338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51313332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c39a9451706a97458e72d713b1ae24c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &51313340
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5865,7 +5852,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771812891}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 0.75
   simulationSpeed: 3.75
   stopAction: 0
   cullingMode: 0

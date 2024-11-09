@@ -24,13 +24,13 @@ public class PlayerController : MonoBehaviour
     protected ParticleSystem jumpForce;
     private Animator playerAnim;
     private GameManager gameManager;
-    private CameraShake cameraShake;
+    private ObjectShake cameraShake;
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        cameraShake = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
+        cameraShake = GameObject.FindWithTag("MainCamera").GetComponent<ObjectShake>();
         playerAnim = GetComponent<Animator>();
     }
 
@@ -39,26 +39,33 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         RestrictOnBounds();
-
+        if(Input.GetKey(KeyCode.W))
+        {
+            if(cameraShake != null && isOnPlatform)
+            {
+                StartCoroutine(cameraShake.ShakeCamera(0.5f, .4f, .15f, 1, 1));
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(Input.GetKey(KeyCode.W))
+            StopAllCoroutines();
+
+            if (Input.GetKey(KeyCode.W))
             {
                 Jump(jumpSpeed + 8f);
 
-                if(jumpForce != null)
+                if (jumpForce != null)
                 {
                     jumpForce.Play();
                 }
-
-                StartCoroutine(cameraShake.ShakeCamera(.2f, .14f));
             }
             else
             {
                 Jump(jumpSpeed);
             }
-        }        
+        }
     }
+
 
     void FixedUpdate()
     {

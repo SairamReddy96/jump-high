@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     protected GameObject player;
     [SerializeField] protected GameObject snowFX;
-    protected CameraShake cameraShake;
+    protected ObjectShake cameraShake;
     [SerializeField]
     private TextMeshProUGUI platformText;
     [SerializeField]
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         jumpHeight = new Vector3(0, 10.5f, -4);
         StartCoroutine(MakePlatformSpawn());
         //Debug.Log("Platform Generation has been called!");
-        cameraShake = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
+        cameraShake = GameObject.FindWithTag("MainCamera").GetComponent<ObjectShake>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SaveScore();
-        StartCoroutine(cameraShake.ShakeCamera(.4f, .15f));
+        StartCoroutine(cameraShake.ShakeCamera(1, .4f, .15f, 1, 1));
         isGameActive = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
