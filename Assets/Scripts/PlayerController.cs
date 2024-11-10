@@ -39,9 +39,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         RestrictOnBounds();
-        if(Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
-            if(cameraShake != null && isOnPlatform)
+            if (cameraShake != null && isOnPlatform)
             {
                 StartCoroutine(cameraShake.ShakeCamera(0.5f, .4f, .15f, 1, 1));
             }
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         //Debug.Log("FixedUpdate is running");
-        Move();      
+        Move();
     }
     void Move()
     {
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     void Jump(float jumpSpeed)
     {
         //Debug.Log("Jump is called");
-        if(isOnPlatform)
+        if (isOnPlatform)
         {
             playerRb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
 
@@ -98,11 +98,11 @@ public class PlayerController : MonoBehaviour
 
     void RestrictOnBounds()
     {
-        if(transform.position.x > xBound-9.5f)
+        if (transform.position.x > xBound - 9.5f)
         {
             transform.position = new Vector3(xBound - 9.5f, transform.position.y, transform.position.z);
         }
-        if(transform.position.x < -xBound)
+        if (transform.position.x < -xBound)
         {
             transform.position = new Vector3(-xBound, transform.position.y, transform.position.z);
         }
@@ -117,32 +117,33 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Ground"))
         {
             playerAnim.SetBool("isJumping", false);
             movementFX.SetActive(true);
             //Debug.Log("Collision!");
         }
-        if(collision.gameObject.CompareTag("Spike") || collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Spike") || collision.gameObject.CompareTag("Enemy"))
         {
             PlayerDeath();
         }
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.CompareTag("Enemy")) {
+        if (collider.gameObject.CompareTag("Enemy"))
+        {
             PlayerDeath();
         }
     }
     void PlayMovParticles(float horizontaInput)
     {
-        if(horizontaInput < 0 && !rightFX.isPlaying)
+        if (horizontaInput < 0 && !rightFX.isPlaying)
         {
             rightFX.Play();
         }
-        else if(horizontaInput > 0 && !leftFX.isPlaying)
+        else if (horizontaInput > 0 && !leftFX.isPlaying)
         {
-            leftFX.Play();  
+            leftFX.Play();
         }
     }
 }

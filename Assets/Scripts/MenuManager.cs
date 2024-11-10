@@ -18,5 +18,6 @@ public class MenuManager : MonoBehaviour
     public void BacktoMenu()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
 }

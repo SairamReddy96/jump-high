@@ -47,13 +47,8 @@ public class GameManager : MonoBehaviour
         while (isGameActive)
         {
             yield return new WaitForSeconds(0.5f);
-            GeneratePlatforms();
+            GenerateRandomPlatforms();
         }
-    }
-
-    void GeneratePlatforms()
-    {
-
     }
     public void GameOver()
     {
@@ -70,7 +65,27 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(2);
     }
+    void GenerateRandomPlatforms()
+    {
+        int randomIndex = Random.Range(0, platformPrefabs.Count);
+        GameObject platform = Instantiate(platformPrefabs[randomIndex], jumpHeight, platformPrefabs[randomIndex].transform.rotation);
+        MovePlatform movePlatform = platform.GetComponent<MovePlatform>();
+        if (movePlatform != null)
+        {
+            float speed = movePlatform.GetPlatformVelocity();
 
+            if (speed == prevSpeed)
+            {
+                // Debug.Log("Same speed");
+                movePlatform.UpdatePlatformVeclocity(speed * 1.35f);
+
+            }
+            prevSpeed = speed;
+        }
+        //Debug.Log("The platform height is " + jumpHeight);
+        jumpHeight = platform.transform.position + new Vector3(0, 12.5f);
+
+    }
     public void IncreasePlatformCount()
     {
         platformCount++;
@@ -80,7 +95,7 @@ public class GameManager : MonoBehaviour
     void UpdateHighScore()
     {
         int currentHighScore = PlayerPrefs.GetInt("HighScore", 0); //default value - if none return 0
-        if(platformCount > currentHighScore)
+        if (platformCount > currentHighScore)
         {
             PlayerPrefs.SetInt("HighScore", platformCount);
             PlayerPrefs.Save();
@@ -88,7 +103,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            highScoreText.text = "High Score : "+ currentHighScore;
+            highScoreText.text = "High Score : " + currentHighScore;
         }
         highPlatformScore = currentHighScore;
     }
@@ -99,7 +114,8 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetInt("CurrentScore", platformCount);
 
-        if (platformCount > highScore) {
+        if (platformCount > highScore)
+        {
             PlayerPrefs.SetInt("HighScore", platformCount);
         }
 
