@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Spike
   - PlayerTrigger
+  - Enemy
   layers:
   - Default
   - TransparentFX
